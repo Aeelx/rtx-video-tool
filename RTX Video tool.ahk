@@ -62,7 +62,9 @@ ToggleHide(*)
 
 UpdateTrayTip()
 {
-    A_IconTip := "NVIDIA RTX video enhancements: " . rtxVideoStatus
+	try {
+		A_IconTip := "NVIDIA RTX video enhancements: " . rtxVideoStatus
+	}
 }
 
 ToggleSuperResolution(*)
@@ -93,11 +95,15 @@ ToggleSuperResolution(*)
             if ControlGetChecked(superResButton) {
                 ControlChooseIndex 0, comboBox, "NVIDIA Control Panel"
                 rtxVideoStatus := "OFF"
-				TraySetIcon(iconOff, iconIDOff)
+                try {
+                    TraySetIcon(iconOff, iconIDOff)
+                }
             } else {
                 ControlChooseIndex 5, comboBox, "NVIDIA Control Panel"
                 rtxVideoStatus := "ON"
-				TraySetIcon(iconOn, iconIDOn)
+                try {
+				    TraySetIcon(iconOn, iconIDOn)
+                }
             }
             
             UpdateTrayTip()
@@ -147,10 +153,14 @@ CheckSuperResolution() {
             ; Toggle the setting
             if ControlGetChecked(superResButton) {
                 rtxVideoStatus := "ON"
-				TraySetIcon(iconOn, iconIDOn)
+                try {
+                    TraySetIcon(iconOn, iconIDOn)
+                }
             } else {
                 rtxVideoStatus := "OFF"
-				TraySetIcon(iconOff, iconIDOff)
+                try {
+				    TraySetIcon(iconOff, iconIDOff)
+                }
             }
             
             UpdateTrayTip()
